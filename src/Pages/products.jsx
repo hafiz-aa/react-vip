@@ -2,6 +2,7 @@ import { Fragment, useState, useEffect, useRef } from "react";
 import CardProduct from "../components/Fragments/CardProducts";
 import Button from "../components/Elements/Button";
 import { getProducts } from "../services/service.page";
+import { getUserName } from "../services/auth.service";
 // import Counter from "../components/Fragments/Counter";
 
 const products = [
@@ -32,15 +33,25 @@ const products = [
  * Render the ProductsPage component.
  */
 
-const email = localStorage.getItem("email");
+const token = localStorage.getItem("token");
 
 const ProductsPage = () => {
   const [cart, setCart] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [products, setProducts] = useState([]);
+  const [username, setUsername] = useState("");
 
   useEffect(() => {
     setCart(JSON.parse(localStorage.getItem("cart")) || []);
+  }, []);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      setUsername(getUserName(token));
+    } else {
+      window.location.href = "/login";
+    }
   }, []);
 
   useEffect(() => {
@@ -61,7 +72,7 @@ const ProductsPage = () => {
   }, [products, cart]);
 
   const handleLogout = () => {
-    localStorage.removeItem("email");
+    localStorage.removeItem("token");
     localStorage.removeItem("password");
     window.location.href = "/login";
   };
@@ -94,7 +105,7 @@ const ProductsPage = () => {
   return (
     <Fragment>
       <div className="flex justify-end h-20 bg-blue-600 text-white items-center px-10">
-        {email}{" "}
+        {username}
         <Button className="ml-5 bg-black" onClick={handleLogout}>
           Logout
         </Button>
