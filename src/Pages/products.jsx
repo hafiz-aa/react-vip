@@ -1,7 +1,7 @@
 import { Fragment, useState, useEffect, useRef } from "react";
 import CardProduct from "../components/Fragments/CardProducts";
 import Button from "../components/Elements/Button";
-import { getProducts } from "../services/service.page";
+import { getProducts } from "../services/product.service";
 import { useLogin } from "../hooks/useLogin";
 // import Counter from "../components/Fragments/Counter";
 
@@ -74,14 +74,6 @@ const ProductsPage = () => {
     }
   };
 
-  // useRef
-  // const cartRef = useRef(JSON.parse(localStorage.getItem("cart")));
-
-  // const handleAddToCartRef = (id) => {
-  //   cartRef.current = [...cartRef.current, { id, qty: 1 }];
-  //   localStorage.setItem("cart", JSON.stringify(cartRef.current));
-  // };
-
   const totalPriceRef = useRef(null);
   useEffect(() => {
     if (cart.length > 0) {
@@ -104,7 +96,7 @@ const ProductsPage = () => {
           {products.length > 0 &&
             products.map((product) => (
               <CardProduct key={product.id}>
-                <CardProduct.Header image={product.image} />
+                <CardProduct.Header image={product.image} id={product.id} />
                 <CardProduct.Body name={product.title}>{product.description}</CardProduct.Body>
                 <CardProduct.Footer price={product.price} id={product.id} handleAddToCart={handleAddToCart} />
               </CardProduct>
