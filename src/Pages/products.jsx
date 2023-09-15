@@ -5,30 +5,6 @@ import { getProducts } from "../services/product.service";
 import { useLogin } from "../hooks/useLogin";
 // import Counter from "../components/Fragments/Counter";
 
-const products = [
-  {
-    id: 1,
-    name: "Sepatu Abu",
-    price: 1000000,
-    image: "/images/shoes-1.jpg",
-    description: `Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officia quaerat sit voluptatum. Iure, voluptates maxime.`,
-  },
-  {
-    id: 2,
-    name: "Sepatu Biru",
-    price: 1200000,
-    image: "/images/shoes-2.jpg",
-    description: `Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ut quidem sed veritatis fugiat assumenda, explicabo deleniti nulla quisquam cumque molestias?`,
-  },
-  {
-    id: 3,
-    name: "Sepatu Putih",
-    price: 700000,
-    image: "/images/shoes-3.jpg",
-    description: `Lorem, ipsum dolor sit amet consectetur adipisicing elit.`,
-  },
-];
-
 /**
  * Render the ProductsPage component.
  */
@@ -92,7 +68,7 @@ const ProductsPage = () => {
         </Button>
       </div>
       <div className="flex justify-center py-5">
-        <div className="w-3/4 flex flex-wrap">
+        <div className="w-4/6 flex flex-wrap">
           {products.length > 0 &&
             products.map((product) => (
               <CardProduct key={product.id}>
